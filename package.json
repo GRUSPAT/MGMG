@@ -10,8 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "lottie-ios": "^3.5.0",
-    "lottie-react-native": "^6.0.0-rc.3",
+    "lottie-react-native": "^5.1.5",
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-lottie-splash-screen": "^1.1.1",
