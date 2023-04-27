@@ -10,11 +10,15 @@
     "test": "jest"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@react-native-firebase/app": "^17.4.2",
     "@react-native-firebase/auth": "^17.4.2",
     "@react-native-google-signin/google-signin": "^9.0.2",
     "lottie-ios": "^3.5.0",
     "lottie-react-native": "^6.0.0-rc.3",
+=======
+    "lottie-react-native": "^5.1.5",
+>>>>>>> refs/remotes/origin/develop
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-lottie-splash-screen": "^1.1.1",

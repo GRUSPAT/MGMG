@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MGMG</string>
+    <color name="white">#F2F5EA</color>
 </resources>
