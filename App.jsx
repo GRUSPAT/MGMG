@@ -1,19 +1,28 @@
+import { View, Text, Button, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+
 import Lottie from 'lottie-react-native';
+
 import SplashScreen from 'react-native-lottie-splash-screen'
 import LoginScreen from './screens/LoginScreen';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import RegisterScreen from './screens/RegisterScreen';
+import DashboardScreen from './screens/DashboardScreen';
+
+import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import { firebase } from './config';
+
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  GoogleSignin.configure({
-      webClientId: '834855187376-k5mlvkmrsvli2naubkckso34hadltast.apps.googleusercontent.com',
-  });
-
+  // Handle user state changes
   function onAuthStateChanged(user) {
       setUser(user);
       if (initializing) setInitializing(false);
@@ -25,26 +34,39 @@ const App = () => {
   }, []);
 
   if (initializing) return null;
-
-  async function onGoogleButtonPress() {
-      // Check if your device supports Google Play
-      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-      // Get the users ID token
-      const { idToken } = await GoogleSignin.signIn();
-
-      // Create a Google credential with the token
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    
-      // Sign-in the user with the credential
-      return auth().signInWithCredential(googleCredential);
-    }
-
+  
+  if(!user){
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name='Login' component={LoginScreen} />
+        <Stack.Screen name='Register' component={RegisterScreen} />
+      </Stack.Navigator>
+    );
+  }
   return (
-    <Button
-            title="Google Sign-In"
-            onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-        />
-  );
+    <Stack.Navigator>
+      <Stack.Screen name='Dashboard' component={DashboardScreen} />
+    </Stack.Navigator>
+  )
 };
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 23,
+    fontWeight: 'bold',
+  }
+});
+
+export default () => {
+  return (
+    <NavigationContainer>
+      <App />
+    </NavigationContainer>
+  );
+};

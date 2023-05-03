@@ -22,7 +22,15 @@
           }
         },
         {
-          "client_id": "834855187376-k5mlvkmrsvli2naubkckso34hadltast.apps.googleusercontent.com",
+          "client_id": "834855187376-qeqjebgkdqkru2rgg1r7711l4f6th5df.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mgmg",
+            "certificate_hash": "4e7429e6806e6a5a5694738cc4a281677c6d779a"
+          }
+        },
+        {
+          "client_id": "834855187376-li1ogmtv4bq6ij34su18ed4d8pujsr64.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
