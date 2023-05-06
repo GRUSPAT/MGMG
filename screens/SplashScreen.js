@@ -11,7 +11,7 @@ class SplashScreen extends Component {
     this.animation.play();
 
     setTimeout(() => {
-      this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('Welcome');
     }, 3000);
   }
 

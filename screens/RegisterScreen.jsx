@@ -1,46 +1,35 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { firebase } from '../config';
+
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../src/config/config';
+
+//import { firebase } from '../src/config/config';
+//import { firestore } from '../src/config/config';
+//import { addDoc, collection, doc, setDoc } from "firebase/firestore"; 
+
+import { useNavigation } from '@react-navigation/native';
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const navigation = useNavigation();
 
-  registerUser = async (email, password, firstName, lastName) => {
-
-    await firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      firebase.auth().currentUser.sendEmailVerification({
-        handleCodeInApp: true,
-        url:'https://mgmg-007.firebaseapp.com',
-      })
-      .then(() => {
-        alert('Wysłaliśmy Ci email do weryfikacji konta');
-      }).catch((error) => {
-        console.error(error);
-      })
-      .then(() => {
-        firebase.firestore().collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .set({
-          firstName,
-          lastName,
-          email,
-        })
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-    })
-    .catch((error) => {
+  const registerUser = async (email, password, firstName, lastName) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch(error) {
       console.error(error);
-    })
+    }
   };
     
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>
+        Zarejestruj się
+      </Text>
       <View>
         <TextInput
           style={styles.textInput}
@@ -75,7 +64,15 @@ const RegisterScreen = () => {
         onPress={() => registerUser(email, password, firstName, lastName)}
         style={styles.button}
       >
-        <Text style={{fontWeight:'bold', fontSize:22}}>Zarejestruj</Text>
+        <Text style={{fontWeight:'bold', fontSize:22}}>
+          Zarejestruj
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        onPress={() => navigation.navigate('Login')}
+        style={{marginTop:20}}
+      >
+        <Text style={{fontWeight:'bold', fontSize:16}}>Masz już konto? Zaloguj się!</Text>
       </TouchableOpacity>
     </View>
   );
