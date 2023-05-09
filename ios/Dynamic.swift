@@ -3,7 +3,8 @@ import Foundation
 import Lottie
 
 @objc class Dynamic: NSObject {
-
+  
+ 
   @objc func createAnimationView(rootView: UIView, lottieName: String) -> AnimationView {
     let animationView = AnimationView(name: lottieName)
     animationView.frame = rootView.frame
@@ -14,6 +15,7 @@ import Lottie
 
   @objc func play(animationView: AnimationView) {
     animationView.play(
+      fromProgress: 0.0, toProgress: 1.0, loopMode: LottieLoopMode.loop,
       completion: { (success) in
         RNSplashScreen.setAnimationFinished(true)
       }

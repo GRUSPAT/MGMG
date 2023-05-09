@@ -21,7 +21,13 @@
     //This is where we will put the logic to get access to rootview
     UIView *rootView = self.window.rootViewController.view;
     
-    rootView.backgroundColor = [UIColor whiteColor]; // change with your desired backgroundColor
+    CGFloat red = 242.0 / 255.0;
+    CGFloat green = 245.0 / 255.0;
+    CGFloat blue = 234.0 / 255.0;
+    CGFloat alpha = 1.0;
+    
+    
+    rootView.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; // change with your desired backgroundColor
  
     Dynamic *t = [Dynamic new];
     UIView *animationUIView = (UIView *)[t createAnimationViewWithRootView:rootView lottieName:@"loading"]; // change lottieName to your lottie files name

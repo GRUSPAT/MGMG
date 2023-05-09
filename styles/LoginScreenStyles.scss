@@ -1,0 +1,106 @@
+@use 'base';
+@use 'variables' as v;
+
+%formContainer {
+    @extend %rowContainer;
+    height: 45;
+    width: 240;
+    border-width: 1px;
+    border-radius: 15px;
+}
+.background {
+    margin-bottom: 50px;
+}
+.container {
+    justify-content: flex-start;
+    align-items: center;
+    background-color: v.$primary-color;
+    
+  }
+.title {
+    font-size: 30;
+    color: v.$secondary-color;
+    font-weight: bold;
+    margin-top: 35%;
+    margin-bottom: 30;
+    @extend %font;
+    
+  }
+.input {
+    width: 80%;
+    height: 40;
+    color: v.$accent-color;
+    @extend %font;
+  }
+
+.googleButton {
+    padding: 3%;
+    @extend %formContainer;
+    border-color: white;
+    background-color: white;
+    margin-bottom: 20;
+}
+.googleImage {
+    margin-left: 20;
+    margin-right: 5;
+}
+.mailImage{
+    margin-left: 10;
+    margin-right: 5;
+    height: 15;
+    width: 15;
+}
+.lockImage {
+    height: 20;
+    width: 20;
+    margin-left: 15;
+    margin-right: 9;
+}
+.googleButtonText {
+    color: v.$secondary-color;
+    font-size: 15;
+    font-weight: bold;
+    @extend %font;
+}
+.inputContainer {
+    @extend %formContainer;
+    border-color: v.$accent-color;
+    margin-bottom: 20;
+}
+.separator {
+    height: 100%;
+    width: 1;
+    background-color: v.$accent-color;
+    margin-left: 5;
+    margin-right: 5;
+}
+.button {
+    height: 45;
+    width: 240;
+    border-width: 1px;
+    border-radius: 15px;
+    align-items: center;
+    border-color: v.$accent-color;
+    background-color: v.$accent-color;
+    margin-top: 20;
+    margin-bottom: 20;
+  }
+.buttonText {
+    color: v.$primary-color;
+    margin-top: 10;
+    font-size: 16;
+    font-weight: bold;
+    @extend %font;
+  }
+.textContainer {
+    flex-direction: row;
+    margin-bottom: 25%;
+}
+.plainText {
+    @extend %font;
+}
+.clickableText {
+    color: v.$accent-color;
+    font-weight: bold;
+    @extend %font;
+}
