@@ -1,20 +1,18 @@
+import { StyleSheet } from 'react-native';
 import React, { useEffect } from 'react';
-import Lottie from 'lottie-react-native';
+
+import RootNavigation from './navigation';
 import SplashScreen from 'react-native-lottie-splash-screen'
 import LoginScreen from './screens/LoginScreen';
 
 
 
-const App = () => {
+export default function App() {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
 
-  return (
-    <LoginScreen/>
-    //<Lottie source={require('./assets/animations/error.json')} autoPlay loop />
-  );
-};
-
-
-export default App;
+  return(
+    <RootNavigation />
+  )
+}
