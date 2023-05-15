@@ -5,6 +5,12 @@ import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/go
 import { signInWithEmailAndPassword, onAuthStateChanged, signInWithCredential, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../src/config/config';
 
+import AppStyles from '../styles/LoginScreenStyles.scss'
+import Background from '../assets/backgrounds/LoginBackground.svg';
+import GoogleSvg from '../assets/icons/google.svg';
+import MailSvg from '../assets/icons/mail.svg';
+import LockSvg from '../assets/icons/lock.svg';
+
 //import { firebase } from '../src/config/config'
 
 import { useNavigation } from '@react-navigation/native';
@@ -62,43 +68,54 @@ const LoginScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>
+        <View style={AppStyles.container}>
+            <Background syle={AppStyles.background}/>
+            <Text style={AppStyles.title}>
                 Zaloguj się
             </Text>
-            <View style={{marginTop:40}}>
-                <GoogleSigninButton
-                style={{width: 300, height: 65}}
-                onPress={onGoogleButtonPress}
-                />
-            </View>
-            <View style={{marginTop:40}}>
+            <TouchableOpacity style={AppStyles.googleButton} onPress={onGoogleButtonPress}>
+      <GoogleSvg style={AppStyles.googleImage} />
+        <Text style={AppStyles.googleButtonText}>Kontynuuj z Google</Text>
+      </TouchableOpacity>
+            
+            <View style={AppStyles.inputContainer}>
+                <MailSvg style={AppStyles.mailImage} />
+                <View style={AppStyles.separator} />
                 <TextInput 
-                    style={styles.textInput}
-                    placeholder='Email'
+                    style={AppStyles.input}
+                    placeholder="e-mail"
+                    placeholderTextColor="#00B4D8"
+                    autoCapitalize='none'
                     onChangeText={(email) => setEmail(email)}
                     autoCorrect={false}
                 />
+            </View>
+            <View style={AppStyles.inputContainer}>
+                <LockSvg style={AppStyles.lockImage} />
+                <View style={AppStyles.separator} />
                 <TextInput 
-                    style={styles.textInput}
-                    placeholder='Password'
-                    onChangeText={(password) => setPassword(password)}
+                    style={AppStyles.input}
+                    placeholder="hasło"
+                    placeholderTextColor="#00B4D8"
                     autoCapitalize='none'
+                    onChangeText={(password) => setPassword(password)}
                     autoCorrect={false}
                     secureTextEntry={true}
                 />
             </View>
+
             <TouchableOpacity 
                 onPress={() => loginUser(email, password)}
-                style={styles.button}
+                style={AppStyles.button}
             >
-                <Text style={{fontWeight:'bold', fontSize:22}}>Zaloguj się</Text>
+                <Text style={AppStyles.buttonText}>Zaloguj się</Text>
             </TouchableOpacity>
             <TouchableOpacity 
                 onPress={() => navigation.navigate('Register')}
-                style={{marginTop:20}}
+                style={AppStyles.textContainer}
             >
-                <Text style={{fontWeight:'bold', fontSize:16}}>Nie masz konta? Zarejestruj teraz!</Text>
+                <Text style={AppStyles.plainText}>Nie masz jeszcze konta? </Text>
+        <Text style={AppStyles.clickableText}>Zarejestruj się!</Text>
             </TouchableOpacity>
         </View>
     );

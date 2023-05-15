@@ -17,6 +17,15 @@
     background-color: v.$primary-color;
     
   }
+  .Title{
+    font-size: 60;
+    color: v.$secondary-color;
+    font-weight: bold;
+    margin-top: 10%;
+    margin-bottom: 30;
+    line-height: 70px;
+    @extend %font;
+  }
 .title {
     font-size: 30;
     color: v.$secondary-color;
@@ -25,6 +34,14 @@
     margin-bottom: 30;
     @extend %font;
     
+  }
+  .titleRegister{
+    font-size: 30;
+    color: v.$secondary-color;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-bottom: 30;
+    @extend %font;
   }
 .input {
     width: 80%;
@@ -55,6 +72,10 @@
     width: 20;
     margin-left: 15;
     margin-right: 9;
+}
+.personImage {
+    margin-left: 15;
+    margin-right: 7;
 }
 .googleButtonText {
     color: v.$secondary-color;

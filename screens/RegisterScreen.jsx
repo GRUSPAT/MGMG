@@ -10,6 +10,13 @@ import { auth } from '../src/config/config';
 
 import { useNavigation } from '@react-navigation/native';
 
+import AppStyles from '../styles/LoginScreenStyles.scss'
+import Background from '../assets/backgrounds/LoginBackground.svg';
+import GoogleSvg from '../assets/icons/google.svg';
+import MailSvg from '../assets/icons/mail.svg';
+import LockSvg from '../assets/icons/lock.svg';
+import PersonSvg from '../assets/icons/person.svg';
+
 const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,54 +33,79 @@ const RegisterScreen = () => {
   };
     
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
+    <View style={AppStyles.container}>
+      <Background syle={AppStyles.background}/>
+      <Text style={AppStyles.titleRegister}>
         Zarejestruj się
       </Text>
-      <View>
-        <TextInput
-          style={styles.textInput}
-          placeholder='First Name'
-          onChangeText={(firstName) => setFirstName(firstName)}
-          autoCorrect={false}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder='LastName'
-          onChangeText={(lastName) => setLastName(lastName)}
-          autoCorrect={false}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder='Email'
-          onChangeText={(email) => setEmail(email)}
-          autoCapitalize='none'
-          autoCorrect={false}
-          keyboardType='email-address'
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder='Password'
-          onChangeText={(password) => setPassword(password)}
-          autoCapitalize='none'
-          autoCorrect={false}
-          secureTextEntry={true}
-        />
-      </View>
-      <TouchableOpacity
-        onPress={() => registerUser(email, password, firstName, lastName)}
-        style={styles.button}
-      >
-        <Text style={{fontWeight:'bold', fontSize:22}}>
-          Zarejestruj
-        </Text>
+      <TouchableOpacity style={AppStyles.googleButton} onPress={() => navigation.navigate('Login')}>
+      <GoogleSvg style={AppStyles.googleImage} />
+        <Text style={AppStyles.googleButtonText}>Kontynuuj z Google</Text>
       </TouchableOpacity>
-      <TouchableOpacity 
-        onPress={() => navigation.navigate('Login')}
-        style={{marginTop:20}}
-      >
-        <Text style={{fontWeight:'bold', fontSize:16}}>Masz już konto? Zaloguj się!</Text>
-      </TouchableOpacity>
+      <View style={AppStyles.inputContainer}>
+                <PersonSvg style={AppStyles.personImage} />
+                <View style={AppStyles.separator} />
+                <TextInput 
+                    style={AppStyles.input}
+                    placeholder="Imie"
+                    placeholderTextColor="#00B4D8"
+                    autoCapitalize='none'
+                    onChangeText={(firstName) => setFirstName(firstName)}
+                    autoCorrect={false}
+                />
+            </View>
+            <View style={AppStyles.inputContainer}>
+                <PersonSvg style={AppStyles.personImage} />
+                <View style={AppStyles.separator} />
+                <TextInput 
+                    style={AppStyles.input}
+                    placeholder="Nazwisko"
+                    placeholderTextColor="#00B4D8"
+                    autoCapitalize='none'
+                    onChangeText={(lastName) => setLastName(lastName)}
+                    autoCorrect={false}
+                />
+            </View>
+            <View style={AppStyles.inputContainer}>
+                <MailSvg style={AppStyles.mailImage} />
+                <View style={AppStyles.separator} />
+                <TextInput 
+                    style={AppStyles.input}
+                    placeholder="e-mail"
+                    placeholderTextColor="#00B4D8"
+                    autoCapitalize='none'
+                    onChangeText={(email) => setEmail(email)}
+                    autoCorrect={false}
+                />
+            </View>
+            <View style={AppStyles.inputContainer}>
+                <LockSvg style={AppStyles.lockImage} />
+                <View style={AppStyles.separator} />
+                <TextInput 
+                    style={AppStyles.input}
+                    placeholder="hasło"
+                    placeholderTextColor="#00B4D8"
+                    autoCapitalize='none'
+                    onChangeText={(password) => setPassword(password)}
+                    autoCorrect={false}
+                    secureTextEntry={true}
+                />
+            </View>
+      
+
+            <TouchableOpacity 
+                onPress={() => registerUser(email, password, firstName, lastName)}
+                style={AppStyles.button}
+            >
+                <Text style={AppStyles.buttonText}>Zarejestruj się</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+                onPress={() => navigation.navigate('Login')}
+                style={AppStyles.textContainer}
+            >
+                <Text style={AppStyles.plainText}>Masz już konto? </Text>
+        <Text style={AppStyles.clickableText}>Zaloguj się!</Text>
+            </TouchableOpacity>
     </View>
   );
 };

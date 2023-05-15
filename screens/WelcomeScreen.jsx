@@ -1,34 +1,36 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
+
+import AppStyles from '../styles/LoginScreenStyles.scss'
+import Background from '../assets/backgrounds/WelcomeBackground.svg';
 
 const WelcomeScreen = () => {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>
-                Witaj w MGMG
+        <View style={AppStyles.container}>
+            <Background syle={AppStyles.background}/>
+            <Text style={AppStyles.Title}>
+                Witaj w {'\n'}MGMG
             </Text>
-            <Text style={styles.text}>
+            <Text style={AppStyles.plainText}>
                 Rozpocznij rywalizację!
             </Text>
             <TouchableOpacity 
                 onPress={() => navigation.navigate('Login')}
-                style={styles.button}
+                style={AppStyles.button}
             >
-                <Text style={{fontWeight:'bold', fontSize:22}}>
+                <Text style={AppStyles.buttonText}>
                     Zaloguj się
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity 
                 onPress={() => navigation.navigate('Register')}
-                style={{marginTop:20}}
+                style={AppStyles.textContainer}
             >
-                <Text style={{fontWeight:'bold', fontSize:16}}>
-                    Nie masz konta? Zarejestruj teraz!
-                </Text>
+                <Text style={AppStyles.plainText}>Nie masz jeszcze konta? </Text>
+        <Text style={AppStyles.clickableText}>Zarejestruj się!</Text>
             </TouchableOpacity>
         </View>
     );

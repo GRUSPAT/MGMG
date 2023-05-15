@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Lottie from 'lottie-react-native';
-import AppStyles from '../styles/LoginScreenStyles.scss'
+
 import {
   View,
   Image,
@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import AppStyles from '../styles/LoginScreenStyles.scss'
 import Background from '../assets/backgrounds/LoginBackground.svg';
 import GoogleSvg from '../assets/icons/google.svg';
 import MailSvg from '../assets/icons/mail.svg';
