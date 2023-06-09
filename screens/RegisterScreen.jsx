@@ -2,11 +2,9 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-nativ
 import React, { useState, useEffect } from 'react';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../src/config/config';
+import { auth, firestore } from '../src/config/config';
 
-//import { firebase } from '../src/config/config';
-//import { firestore } from '../src/config/config';
-//import { addDoc, collection, doc, setDoc } from "firebase/firestore"; 
+import { setDoc, doc} from "firebase/firestore"; 
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,17 +16,25 @@ import Background from '../assets/backgrounds/LoginBackground.svg';
 import ActionButton from '../components/form/ActionButton';
 
 const RegisterScreen = () => {
+  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const navigation = useNavigation();
 
-  const registerUser = async (email, password, firstName, lastName) => {
+  const registerUser = async (email, password, userName) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        const uid = response.user.uid;
+        const data = {
+          uid: uid,
+          userName: userName,
+          email: email
+        };
+        setDoc(doc(firestore, "users", uid), data);
+      })
     } catch(error) {
-      console.error(error);
+      console.log(error);
     }
   };
     
@@ -39,11 +45,11 @@ const RegisterScreen = () => {
         Zarejestruj się
       </Text>
       <GoogleBtn/>
-      <Input type="nickname" onChangeText={(firstName) => setFirstName(firstName)}/>
+      <Input type="nickname" onChangeText={(userName) => setUserName(userName)}/>
       <Input type="email" onChangeText={(email) => setEmail(email)}/>
       <Input type="password" onChangeText={(password) => setPassword(password)}/>
       <ActionButton 
-      onPress={() => registerUser(email, password, firstName)} 
+      onPress={() => registerUser(email, password, userName)} 
       text="Zarejestruj się"/>
       <ActionButton 
       type="text" 

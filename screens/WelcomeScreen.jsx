@@ -13,9 +13,12 @@ const WelcomeScreen = () => {
         <View style={AppStyles.container}>
             <Background syle={AppStyles.background}/>
             <Text style={AppStyles.Title}>
-                Witaj w {'\n'}MGMG
+                Witaj w 
             </Text>
-            <Text style={AppStyles.plainText}>
+            <Text style={AppStyles.Title}>
+                MGMG
+            </Text>
+            <Text style={AppStyles.plainText2}>
                 Rozpocznij rywalizację!
             </Text>
             <TouchableOpacity 
@@ -31,12 +34,12 @@ const WelcomeScreen = () => {
                 style={AppStyles.textContainer}
             >
                 <Text style={AppStyles.plainText}>Nie masz jeszcze konta? </Text>
-        <Text style={AppStyles.clickableText}>Zarejestruj się!</Text>
+                <Text style={AppStyles.clickableText}>Zarejestruj się!</Text>
             </TouchableOpacity>
         </View>
     );
 };
-
+/*
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -59,5 +62,5 @@ const styles = StyleSheet.create({
     }
     
 });
-
+*/
 export default WelcomeScreen;

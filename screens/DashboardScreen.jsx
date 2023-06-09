@@ -3,15 +3,16 @@ import React, { useState, useEffect } from 'react';
 
 import { signOut } from 'firebase/auth';
 import { useAuth } from '../src/hooks/useAuth';
-import { auth } from '../src/config/config';
+import { app, auth } from '../src/config/config';
+
+import { getFirestore, doc, getDoc} from 'firebase/firestore';
+
+import AppStyles from '../styles/LoginScreenStyles.scss'
+import Background from '../assets/backgrounds/WelcomeBackground.svg';
 
 import { useNavigation } from '@react-navigation/native';
 
-//import "firebase/firestore";
-//import { firebase } from '../src/config/config';
-//import { getFirestore } from 'firebase/firestore';
-//import { collection, getDocs } from 'firebase/firestore';
-
+const firestore = getFirestore(app);
 import AppStyles from '../styles/LoginScreenStyles.scss';
 import Background from '../assets/backgrounds/DashboardBackground.svg';
 
@@ -19,14 +20,20 @@ import NewIcon from '../assets/icons/new.svg';
 import JoinIcon from '../assets/icons/join.svg';
 
 const DashboardScreen = () => {
-    //const [name, setName] = useState('');
-    //const db = getFirestore(firebase);
+    
+    const [currDoc, setCurrDoc] = useState([]);
     const { user } = useAuth();
     const navigation = useNavigation();
 
+    const getUserData = async(userUid) => {
+        const docRef = doc(firestore, "users", userUid);
+        const docSnap = await getDoc(docRef);
+        setCurrDoc(docSnap.data());
+    }
+
     useEffect(() => {
-        console.log(user);
-    }, []);
+        if(user) getUserData(user.uid);
+    }, [user]);
 
     return (
         <View style={AppStyles.container}>
