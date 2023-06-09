@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore, collection} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApN_GG50__-83UAEqQlBtFH943a9M8q6I",
@@ -17,7 +17,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const firestore = getFirestore(app);
+export const firestore = initializeFirestore(app, {
+    experimentalForceLongPolling: true
+  });
 export const auth = getAuth(app);
 
 export default app;

@@ -3,28 +3,64 @@ import React, { useState, useEffect } from 'react';
 
 import { signOut } from 'firebase/auth';
 import { useAuth } from '../src/hooks/useAuth';
-import { auth } from '../src/config/config';
+import { app, auth } from '../src/config/config';
 
-//import "firebase/firestore";
-//import { firebase } from '../src/config/config';
-//import { getFirestore } from 'firebase/firestore';
-//import { collection, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, getDoc} from 'firebase/firestore';
 
+import AppStyles from '../styles/LoginScreenStyles.scss'
+import Background from '../assets/backgrounds/WelcomeBackground.svg';
+
+const firestore = getFirestore(app);
 
 const DashboardScreen = () => {
-    //const [name, setName] = useState('');
-    //const db = getFirestore(firebase);
+    
+    const [currDoc, setCurrDoc] = useState([]);
     const { user } = useAuth();
 
+    const getUserData = async(userUid) => {
+        const docRef = doc(firestore, "users", userUid);
+        const docSnap = await getDoc(docRef);
+        setCurrDoc(docSnap.data());
+    }
+
     useEffect(() => {
-        console.log(user);
-    }, []);
+        if(user) getUserData(user.uid);
+    }, [user]);
 
     return (
-        <View style={styles.container}>
+        <View style={AppStyles.container}>
+            <Background syle={AppStyles.background}/>
             <View style={{alignItems: 'center', marginTop: 100}}>
-                <Text style={styles.text}>Witaj, {user?.displayName || user?.email}!</Text>
+                <Text style={styles.text}>Witaj, { currDoc ? currDoc.userName : "unknown"}!</Text>
             </View>
+            <TouchableOpacity
+                style={styles.button}
+            >
+                <Text style={{fontSize:15, fontWeight:'bold'}}>
+                    Dostępne gry
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+            >
+                <Text style={{fontSize:15, fontWeight:'bold'}}>
+                    Historia gier
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+            >
+                <Text style={{fontSize:22, fontWeight:'bold'}}>
+                    Utwórz pokój 
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+            >
+                <Text style={{fontSize:22, fontWeight:'bold'}}>
+                    Dołącz
+                </Text>
+            </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => signOut(auth)}
                 style={styles.button}
@@ -49,7 +85,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
     button: {
-        marginTop:50,
+        marginTop:20,
         height:70,
         width:250,
         backgroundColor:'#026efd',
