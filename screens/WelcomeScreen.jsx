@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import AppStyles from '../styles/LoginScreenStyles.scss'
 import Background from '../assets/backgrounds/WelcomeBackground.svg';
+import Lottie from 'lottie-react-native';
 
 const WelcomeScreen = () => {
     const navigation = useNavigation();

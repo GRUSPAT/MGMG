@@ -15,9 +15,11 @@
 		6CB9ABB236D44729B7C3FAAB /* ReemKufi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB2F68714294676930273D3 /* ReemKufi.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-MGMG-MGMGTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-MGMG-MGMGTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E52385572A30EC01005A63BE /* LogoAkademiaNauk.png in Resources */ = {isa = PBXBuildFile; fileRef = E52385562A30EC01005A63BE /* LogoAkademiaNauk.png */; };
+		E52385592A30EC90005A63BE /* ki.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = E52385582A30EC90005A63BE /* ki.jpeg */; };
 		E5918DA929F9E4AE00FDBF2A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E5918DA829F9E4AE00FDBF2A /* loading.json */; };
-		E5AD727B2A0B007700288069 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5AD727A2A0B007700288069 /* GoogleService-Info.plist */; };
-		E5AD727C2A0B007700288069 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5AD727A2A0B007700288069 /* GoogleService-Info.plist */; };
+		E5DBE7EE2A144F4900FCF48A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5DBE7ED2A144F4900FCF48A /* GoogleService-Info.plist */; };
+		E5DBE7EF2A144F4900FCF48A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5DBE7ED2A144F4900FCF48A /* GoogleService-Info.plist */; };
 		E5FA30B429F0CBCA00D1CD15 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FA30B329F0CBCA00D1CD15 /* Dynamic.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,8 +51,10 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-MGMG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MGMG.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MGMG/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-MGMG-MGMGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MGMG-MGMGTests.release.xcconfig"; path = "Target Support Files/Pods-MGMG-MGMGTests/Pods-MGMG-MGMGTests.release.xcconfig"; sourceTree = "<group>"; };
+		E52385562A30EC01005A63BE /* LogoAkademiaNauk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoAkademiaNauk.png; sourceTree = "<group>"; };
+		E52385582A30EC90005A63BE /* ki.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ki.jpeg; sourceTree = "<group>"; };
 		E5918DA829F9E4AE00FDBF2A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		E5AD727A2A0B007700288069 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E5DBE7ED2A144F4900FCF48A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E5FA30B229F0CBCA00D1CD15 /* MGMG-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MGMG-Bridging-Header.h"; sourceTree = "<group>"; };
 		E5FA30B329F0CBCA00D1CD15 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -96,7 +100,9 @@
 		13B07FAE1A68108700A75B9A /* MGMG */ = {
 			isa = PBXGroup;
 			children = (
-				E5AD727A2A0B007700288069 /* GoogleService-Info.plist */,
+				E52385582A30EC90005A63BE /* ki.jpeg */,
+				E52385562A30EC01005A63BE /* LogoAkademiaNauk.png */,
+				E5DBE7ED2A144F4900FCF48A /* GoogleService-Info.plist */,
 				E5918DA829F9E4AE00FDBF2A /* loading.json */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -263,7 +269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5AD727C2A0B007700288069 /* GoogleService-Info.plist in Resources */,
+				E5DBE7EF2A144F4900FCF48A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,11 +277,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E52385572A30EC01005A63BE /* LogoAkademiaNauk.png in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				E5AD727B2A0B007700288069 /* GoogleService-Info.plist in Resources */,
+				E52385592A30EC90005A63BE /* ki.jpeg in Resources */,
 				E5918DA929F9E4AE00FDBF2A /* loading.json in Resources */,
 				6CB9ABB236D44729B7C3FAAB /* ReemKufi.ttf in Resources */,
+				E5DBE7EE2A144F4900FCF48A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
