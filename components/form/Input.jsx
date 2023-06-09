@@ -16,7 +16,7 @@ const Input = ({ type, onChangeText }) => {
                 <View style={AppStyles.separator} />
                 <TextInput 
                     style={AppStyles.input}
-                    placeholder="Imie"
+                    placeholder="nazwa użytkownika"
                     placeholderTextColor="#00B4D8"
                     autoCapitalize='none'
                     onChangeText={onChangeText}

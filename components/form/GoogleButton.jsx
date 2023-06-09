@@ -1,6 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Text} from 'react-native';
+
 import { GoogleSignin} from '@react-native-google-signin/google-signin';
+
+import { signInWithCredential, GoogleAuthProvider } from 'firebase/auth';
+import { auth, firestore } from '../../src/config/config';
+import { doc, setDoc } from 'firebase/firestore';
 
 import AppStyles from '../../styles/LoginScreenStyles.scss'
 import GoogleSvg from '../../assets/icons/google.svg';
@@ -11,20 +16,28 @@ const GoogleBtn = () => {
     });
 
     const onGoogleButtonPress = async () => {
-        // Get the users ID token
-        const { idToken } = await GoogleSignin.signIn();
-    
-        // Create a Google credential with the token
-        const googleCredential = GoogleAuthProvider.credential(idToken);
-        
-        // Sign-in the user with the credential
-        const user_sign_in = signInWithCredential(auth, googleCredential);
-        user_sign_in.then((user) => {
-          console.log(user);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+      // Get the users ID token
+      const { idToken } = await GoogleSignin.signIn();
+  
+      // Create a Google credential with the token
+      const googleCredential = GoogleAuthProvider.credential(idToken);
+      
+      // Sign-in the user with the credential
+      signInWithCredential(auth, googleCredential)
+      .then((response) => {
+          const uid = response.user.uid;
+          const userName = response.user.displayName;
+          const email = response.user.email;
+          const data = {
+              uid: uid,
+              userName: userName,
+              email: email
+          };
+          setDoc(doc(firestore, "users", uid), data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     }
 
   return (

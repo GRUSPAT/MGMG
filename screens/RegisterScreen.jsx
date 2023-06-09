@@ -54,7 +54,7 @@ const RegisterScreen = () => {
       <ActionButton 
       type="text" 
       onPress={() => navigation.navigate('Login')}
-      text="Masz już konto"
+      text="Masz już konto? "
       text2="Zaloguj się!"
       />
     </View>

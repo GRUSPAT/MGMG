@@ -7,9 +7,6 @@ import { app, auth } from '../src/config/config';
 
 import { getFirestore, doc, getDoc} from 'firebase/firestore';
 
-import AppStyles from '../styles/LoginScreenStyles.scss'
-import Background from '../assets/backgrounds/WelcomeBackground.svg';
-
 import { useNavigation } from '@react-navigation/native';
 
 const firestore = getFirestore(app);
@@ -39,17 +36,17 @@ const DashboardScreen = () => {
         <View style={AppStyles.container}>
             <Background style={AppStyles.Bg}/>
             <View style={AppStyles.leftContainer}>
-            <TouchableOpacity
-                onPress={() => signOut(auth)}
-            >
-                <Image
-                style={AppStyles.profileImage}
-                source={require('../assets/images/ProfileImage.png')}
-                />
-            </TouchableOpacity>
-                <Text style={AppStyles.profileText}>
-                    Witaj{'\n'}{user?.displayName || user?.email}
-                </Text>
+                <TouchableOpacity
+                    onPress={() => signOut(auth)}
+                >
+                    <Image
+                    style={AppStyles.profileImage}
+                    source={require('../assets/images/ProfileImage.png')}
+                    />
+                </TouchableOpacity>
+                    <Text style={AppStyles.profileText}>
+                        Witaj{'\n'}{currDoc ? currDoc.userName : "unknown"}
+                    </Text>
             </View>
             
                 <TouchableOpacity style={AppStyles.bigButtonOutline} onPress={() => navigation.navigate('Make')}>
