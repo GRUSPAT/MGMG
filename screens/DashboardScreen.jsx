@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 
 import { signOut } from 'firebase/auth';
 import { useAuth } from '../src/hooks/useAuth';
-import { app, auth } from '../src/config/config';
+import { app, auth, database } from '../src/config/config';
 
 import { getFirestore, doc, getDoc} from 'firebase/firestore';
+import { ref, set } from 'firebase/database';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,7 +18,6 @@ import NewIcon from '../assets/icons/new.svg';
 import JoinIcon from '../assets/icons/join.svg';
 
 const DashboardScreen = () => {
-    
     const [currDoc, setCurrDoc] = useState([]);
     const { user } = useAuth();
     const navigation = useNavigation();
@@ -26,7 +26,25 @@ const DashboardScreen = () => {
         const docRef = doc(firestore, "users", userUid);
         const docSnap = await getDoc(docRef);
         setCurrDoc(docSnap.data());
-    }
+    };
+
+    const createRoom = (roomId, userUid) => {
+        console.log("roomId:", roomId, "owner:", userUid);
+        set(ref(database, 'rooms/' + roomId), {
+            roomId: roomId,
+            owner: userUid
+        });
+        navigation.navigate('Make');
+    };
+
+    const generateRoomId = (userUid) => {
+        let urid = [];
+        for (let i = 0; i< 10; i++){
+            urid.push(userUid[Math.floor(Math.random() * userUid.length)]);
+        }
+        console.log(urid.join(''));
+        return urid.join('');
+    };
 
     useEffect(() => {
         if(user) getUserData(user.uid);
@@ -49,7 +67,7 @@ const DashboardScreen = () => {
                     </Text>
             </View>
             
-                <TouchableOpacity style={AppStyles.bigButtonOutline} onPress={() => navigation.navigate('Make')}>
+                <TouchableOpacity style={AppStyles.bigButtonOutline} onPress={() => createRoom(generateRoomId(currDoc.uid), currDoc.uid)}>
                     <NewIcon style={AppStyles.NewIcon}/>
                     <Text style={AppStyles.bigButtonOutlineText}>Utwórz pokój</Text>
                 </TouchableOpacity>
