@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+import React, { useState } from 'react';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, firestore } from '../src/config/config';
@@ -29,7 +29,8 @@ const RegisterScreen = () => {
         const data = {
           uid: uid,
           userName: userName,
-          email: email
+          email: email,
+          photo: 'null'
         };
         setDoc(doc(firestore, "users", uid), data);
       })

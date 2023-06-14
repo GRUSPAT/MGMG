@@ -1,7 +1,7 @@
-import { View, Text, TouchableOpacity, TextInput} from 'react-native';
-import React, { useState} from 'react';
+import { View, Text } from 'react-native';
+import React, { useState } from 'react';
 
-import { signInWithEmailAndPassword} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../src/config/config';
 
 import GoogleBtn from '../components/form/GoogleButton'
@@ -42,7 +42,6 @@ const LoginScreen = () => {
                 text="Nie masz jeszcze konta?" 
                 text2="Zarejestruj się!"
             />
-            
         </View>
     );
 };

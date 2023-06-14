@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text} from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 
 import { GoogleSignin} from '@react-native-google-signin/google-signin';
 
@@ -28,10 +28,12 @@ const GoogleBtn = () => {
           const uid = response.user.uid;
           const userName = response.user.displayName;
           const email = response.user.email;
+          const photo = response.user.photoURL;
           const data = {
               uid: uid,
               userName: userName,
-              email: email
+              email: email,
+              photo: photo
           };
           setDoc(doc(firestore, "users", uid), data);
       })
