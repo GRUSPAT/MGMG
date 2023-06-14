@@ -220,9 +220,9 @@ const GameScreen = () => {
       <View>
         {gameComplete ? (
           <View style={styles.gameCompleteWrapper}>
-            <Text>
-              <Text style={styles.bold}>Poprawne słowo:</Text> {activeWord}
-            </Text>
+           
+              <Text style={styles.bold}>Poprawne słowo: {activeWord}</Text> 
+          
             <View>
               <Button
                 title="Resetuj"
@@ -234,7 +234,8 @@ const GameScreen = () => {
           </View>
         ) : null}
         <Keyboard onKeyPress={handleKeyPress} />
-      </View>    </SafeAreaView>
+      </View>    
+      </SafeAreaView>
   );
 };
 
