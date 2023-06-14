@@ -12,7 +12,7 @@
     margin-bottom: 50px;
 }
 .container {
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     background-color: v.$primary-color;
     height: 100%;
@@ -140,7 +140,10 @@
 .leftContainer {
     flex-direction: row;
     align-items: flex-start;
-    margin-bottom: 100px;;
+    align-self: flex-start;
+    margin-left: 30;
+    margin-top: -60;
+    margin-bottom: 140px;;
 }
 .Bg{
     width: 100%;
