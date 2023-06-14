@@ -81,7 +81,7 @@ const MakingRoomScreen = () => {
                 </View>
             </View>
             <Text>Oczekiwanie na dołączenie przeciwnika...</Text>
-            <ActionButton text="Rozpocznij grę"/>
+            <ActionButton text="Rozpocznij grę" onPress={()=>navigation.navigate('Game')}/>
             <ActionButton text="Opuść pokój" onPress={leaveRoom}/>
         </View>
     );
