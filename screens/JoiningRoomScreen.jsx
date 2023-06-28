@@ -61,7 +61,7 @@ const JoiningRoomScreen = () => {
                 <View style={AppStyles.roomCard}>
                     <Image
                     style={AppStyles.cardImage}
-                    source={currRoomData.enemy.photo != 'null' ? {uri:currRoomData.enemy.photo} : require('../assets/images/UnknownImage.png')}
+                    source={currRoomData.enemy ? currRoomData.enemy.photo != 'null' ? {uri:currRoomData.enemy.photo} : require('../assets/images/UnknownImage.png') : require('../assets/images/UnknownImage.png')}
                     />
                     <Text style={AppStyles.cardText}>{currRoomData.enemy != {} ? currRoomData.enemy.userName : "?"}</Text>
                 </View>

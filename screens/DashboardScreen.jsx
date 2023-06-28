@@ -49,8 +49,10 @@ const DashboardScreen = () => {
 
     const generateRoomId = (userUid) => {
         let urid = [];
+        const timestamp = Date.now();
+        const combinedValue = userUid + timestamp;
         for (let i = 0; i< 10; i++){
-            urid.push(userUid[Math.floor(Math.random() * userUid.length)]);
+          urid.push(combinedValue[Math.floor(Math.random() * combinedValue.length)]);
         }
         return urid.join('');
     };
@@ -100,7 +102,7 @@ const DashboardScreen = () => {
                 >
                     <Image
                     style={AppStyles.profileImage}
-                    source={currUserData.photo != 'null' ? {uri: currUserData.photo} : require('../assets/images/UnknownImage.png')}
+                    source={currUserData ? currUserData.photo != 'null' ? {uri: currUserData.photo} : require('../assets/images/UnknownImage.png') : require('../assets/images/UnknownImage.png')}
                     />
                 </TouchableOpacity>
                     <Text style={AppStyles.profileText}>

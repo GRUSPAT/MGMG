@@ -8,6 +8,17 @@ import {
   Button,
 } from "react-native";
 
+import { app, auth, database } from '../src/config/config';
+
+import { getFirestore, doc, getDoc} from 'firebase/firestore';
+import { ref, set, onValue, update, query, endAt, orderByValue, get} from 'firebase/database';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { useNavigation } from '@react-navigation/native';
+
+
+
 const Block = ({
   index,
   guess,
@@ -90,6 +101,15 @@ const Keyboard = ({ onKeyPress }) => {
           </View>
         </TouchableOpacity>
       </View>
+      <View style={styles.keyboardRow}>
+        <TouchableOpacity onPress={() => onKeyPress("ENTERVIP")}>
+          <View style={styles.key}>
+            <Text style={styles.keyLetter} adjustsFontSizeToFit>
+              ENTER VIP
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -132,23 +152,81 @@ const GameScreen = () => {
   const [guesses, setGuesses] = React.useState(defaultGuess);
   const [gameComplete, setGameComplete] = React.useState(false);
 
+  const currUserData = useSelector(state => state.user);
+  const currRoomData = useSelector(state => state.room);
+
+  const navigation = useNavigation();
+
+  const generateRandomRooms = () => {
+    console.log("START!");
+    for(var i = 0; i < 20; i++){
+      console.log(i);
+      setActiveWord(words[Math.floor(Math.random() * words.length)]);
+      var tempRoomId;
+      do {
+        tempRoomId = generateRoomId(currUserData.uid);
+      } while (!isUniqueId(tempRoomId));
+
+      set(ref(database, 'rooms/' + tempRoomId), {
+        roomId: tempRoomId,
+        owner: currUserData
+      });
+      set(ref(database, "rooms/" + tempRoomId + "/owner/game1/gameName"), "wordle");
+      for(var j = 0; j < 6; j++){
+        var guessVip = words[Math.floor(Math.random() * words.length)];
+        set(ref(database, "rooms/" + tempRoomId + "/owner/game1/guess" + j), guessVip);
+        if(guessVip === activeWord) {
+          set(ref(database, "rooms/" + tempRoomId + "/owner/game1/result"), "won");
+          break;
+        }else if(j == 5){
+          set(ref(database, "rooms/" + tempRoomId + "/owner/game1/result"), "lose");
+        }
+      }
+    }
+    console.log("KONIEC!");
+  };
+
+  const countRooms = async () => {
+    const roomsRef = ref(database, 'rooms/');
+    let count = 0;
+    onValue(roomsRef, (snapshot) =>{
+      snapshot.forEach((childSnapshot) => {
+        count++;
+      })
+    })
+    console.log("liczba pokoi: " + count);;
+  };
+
+  const isUniqueId = async (tempRoomId) => {
+    const roomRef = ref(database, 'rooms/' + tempRoomId);
+    const snapshot = await get(roomRef);
+    return !snapshot.exists();
+  };
+
+  const generateRoomId = (userUid) => {
+    let urid = [];
+    const timestamp = Date.now();
+    const combinedValue = userUid + timestamp;
+    for (let i = 0; i< 10; i++){
+      urid.push(combinedValue[Math.floor(Math.random() * combinedValue.length)]);
+    }
+    return urid.join('');
+  };
+
   const handleKeyPress = (letter) => {
     const guess = guesses[guessIndex];
 
     if (letter === "ENTER") {
+      set(ref(database, "rooms/" + currRoomData.roomId + "/owner/game1/guess" + guessIndex), guess);
       if (guess.length !== 5) {
         alert("Słowo jest za krótkie.");
-        return;
-      }
-
-      if (!words.includes(guess)) {
-        alert("To nie jest poprawne słowo.");
         return;
       }
 
       if (guess === activeWord) {
         setGuessIndex(guessIndex + 1);
         setGameComplete(true);
+        set(ref(database, "rooms/" + currRoomData.roomId + "/owner/game1/result"), "won");
         alert("Wygrałeś!");
         return;
       }
@@ -157,6 +235,33 @@ const GameScreen = () => {
         setGuessIndex(guessIndex + 1);
       } else {
         setGameComplete(true);
+        set(ref(database, "rooms/" + currRoomData.roomId + "/owner/game1/result"), "lose");
+        alert("Przegrałeś!");
+        return;
+      }
+    }
+
+    if (letter === "ENTERVIP") {
+      const guessVip = words[Math.floor(Math.random() * words.length)];
+      set(ref(database, "rooms/" + currRoomData.roomId + "/owner/game1/guess" + guessIndex), guessVip);
+      setGuessIndex(guessIndex + 1);
+      setGuesses({ ...guesses, [guessIndex]: guessVip });
+
+      if (guessVip === activeWord) {
+        console.log(activeWord);
+        setGuessIndex(guessIndex + 1);
+        setGameComplete(true);
+        set(ref(database, "rooms/" + currRoomData.roomId + "/owner/game1/result"), "won");
+        alert("Wygrałeś!");
+        return;
+      }
+
+      if (guessIndex < 5) {
+        console.log(guessIndex);
+        setGuessIndex(guessIndex + 1);
+      } else {
+        setGameComplete(true);
+        set(ref(database, "rooms/" + currRoomData.roomId + "/owner/game1/result"), "lose");
         alert("Przegrałeś!");
         return;
       }
@@ -172,7 +277,7 @@ const GameScreen = () => {
       return;
     }
 
-    setGuesses({ ...guesses, [guessIndex]: guess + letter });
+    //setGuesses({ ...guesses, [guessIndex]: guess + letter });
   };
 
   React.useEffect(() => {
@@ -180,6 +285,7 @@ const GameScreen = () => {
       setActiveWord(words[Math.floor(Math.random() * words.length)]);
       setGuesses(defaultGuess);
       setGuessIndex(0);
+      set(ref(database, "rooms/" + currRoomData.roomId + "/owner/game1/gameName"), "wordle");
     }
   }, [gameComplete]);
 
@@ -225,16 +331,23 @@ const GameScreen = () => {
           
             <View>
               <Button
-                title="Resetuj"
+                title="Wyjdź"
                 onPress={() => {
                   setGameComplete(false);
+                  navigation.navigate('Dashboard');
                 }}
               />
             </View>
           </View>
         ) : null}
-        <Keyboard onKeyPress={handleKeyPress} />
-      </View>    
+        <View>
+              <Button
+                title="Generator"
+                onPress={generateRandomRooms}
+              />
+            </View>
+      </View>  
+        <Keyboard onKeyPress={handleKeyPress} />  
       </SafeAreaView>
   );
 };
