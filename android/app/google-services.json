@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "834855187376",
+    "project_id": "mgmg-007",
+    "storage_bucket": "mgmg-007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834855187376:android:9c8ce1cdcc170f7c459c75",
+        "android_client_info": {
+          "package_name": "com.mgmg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834855187376-5otpblr3clhcntdh9kknjc9p87otrkbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mgmg",
+            "certificate_hash": "37b21916814e2dd1ee248091ae20e4d177ecdc67"
+          }
+        },
+        {
+          "client_id": "834855187376-qeqjebgkdqkru2rgg1r7711l4f6th5df.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mgmg",
+            "certificate_hash": "4e7429e6806e6a5a5694738cc4a281677c6d779a"
+          }
+        },
+        {
+          "client_id": "834855187376-li1ogmtv4bq6ij34su18ed4d8pujsr64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEppWIfhqa9s4n0z-8r01t_Z_kf5LQzGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834855187376-k5mlvkmrsvli2naubkckso34hadltast.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

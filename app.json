@@ -1,0 +1,10 @@
+{
+  "name": "MGMG",
+  "displayName": "MGMG",
+  "expo": {
+    "android": {
+      "googleServicesFile": "./google-services.json"
+    },
+    "plugins": ["@react-native-google-signin/google-signin"]
+  }
+}

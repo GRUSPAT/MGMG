@@ -1,0 +1,10 @@
+@use 'variables' as v;
+
+%font {
+    font-family: 'ReemKufi';
+    color: v.$secondary-color;
+}
+%rowContainer {
+    flex-direction: row;
+    align-items:center;
+}
